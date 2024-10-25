@@ -1,20 +1,28 @@
 import '6-password.dart';
 
 class User extends Password {
-  String? name;
-  int? age;
-  double? height;
-  int? id;
+  int id;
+  String name;
+  int age;
+  double height;
+  late String user_password;
 
-  User({required this.id, required this.name, required this.age, required this.height, required String user_password})
-      : super(password: user_password);
+  User({
+    required this.id,
+    required this.name,
+    required this.age,
+    required this.height,
+    required String user_password,
+  }) : super(password: user_password) {
+    this.user_password = user_password;
+  }
 
-  static User fromJson(Map<String, dynamic> userJson) {
+  static User fromJson(Map<dynamic, dynamic> userJson) {
     return User(
-      id: userJson['id'],
-      name: userJson['name'],
-      age: userJson['age'],
-      height: userJson['height'],
+      id: userJson['id'] ?? 0,
+      name: userJson['name'] ?? '',
+      age: userJson['age'] ?? 0,
+      height: userJson['height'] ?? 0.0,
       user_password: userJson['user_password'] ?? '',
     );
   }
@@ -25,12 +33,13 @@ class User extends Password {
       'name': name,
       'age': age,
       'height': height,
-      'user_password': password,
+      'user_password': user_password,
     };
   }
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, age: $age, height: $height, Password valid: ${isValid()})';
+    bool passwordValid = super.isValid();
+    return 'User(id : $id ,name: $name, age: $age, height: $height, Password: $passwordValid)';
   }
 }
