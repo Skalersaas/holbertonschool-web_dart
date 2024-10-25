@@ -6,7 +6,7 @@ class User {
 
   User({required this.id, required this.name, required this.age, required this.height});
 
-  static User fromJson(Map<String, dynamic> userJson) {
+  static User fromJson(Map<dynamic, dynamic> userJson) {
     return User(
       id: userJson['id'],
       name: userJson['name'],
